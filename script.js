@@ -42,7 +42,12 @@ class ParkingSpaces {
         };
         this.update = () => {
         };
-        this.delete = () => {
+        this.delete = (plateNumber) => {
+            const filteredParkingSpaces = this.parkingSpaces.filter((parkingSpace) => {
+                return parkingSpace.plateNumber != plateNumber;
+            });
+            this.parkingSpaces = filteredParkingSpaces;
+            populateTable();
         };
         this.parkingSpaces = loadedParkingSpaces;
     }
@@ -76,15 +81,20 @@ function populateTable() {
     if (ParkSpacesTable) {
         ParkSpacesTable.innerHTML = '';
         MemParkingSpaces.read().forEach((parkingSpace) => {
+            var _a;
             const newRow = document.createElement('tr');
+            newRow.id = parkingSpace.plateNumber;
             newRow.innerHTML = `
         <td>${parkingSpace.name}</td>
         <td>${parkingSpace.plateNumber}</td>
         <td>${parkingSpace.entryTime}</td>
         <td>
-          <button type='button'>X</button>
+          <button class="delete-button" type='button'>X</button>
         </td>
       `;
+            (_a = newRow.querySelector(".delete-button")) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
+                MemParkingSpaces.delete(parkingSpace.plateNumber);
+            });
             ParkSpacesTable.appendChild(newRow);
         });
     }

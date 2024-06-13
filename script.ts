@@ -64,8 +64,13 @@ class ParkingSpaces {
 
   }
 
-  delete = () => {
+  delete = (plateNumber: String) => {
+    const filteredParkingSpaces = this.parkingSpaces.filter((parkingSpace: ParkingSpace) => {
+      return parkingSpace.plateNumber != plateNumber;
+    });
 
+    this.parkingSpaces = filteredParkingSpaces;
+    populateTable();
   }
 }
 
@@ -100,20 +105,26 @@ const addAllEventListeners = () => {
 // Render
 function populateTable() {
   const ParkSpacesTable = $('#parkingSpaces');
-  
+
   if (ParkSpacesTable) {
     ParkSpacesTable.innerHTML = '';
 
     MemParkingSpaces.read().forEach((parkingSpace: ParkingSpace) => {
       const newRow = document.createElement('tr');
+
+      newRow.id = parkingSpace.plateNumber;
       newRow.innerHTML = `
         <td>${parkingSpace.name}</td>
         <td>${parkingSpace.plateNumber}</td>
         <td>${parkingSpace.entryTime}</td>
         <td>
-          <button type='button'>X</button>
+          <button class="delete-button" type='button'>X</button>
         </td>
       `
+
+      newRow.querySelector(".delete-button")?.addEventListener('click', () => {
+        MemParkingSpaces.delete(parkingSpace.plateNumber);
+      });
 
       ParkSpacesTable.appendChild(newRow);
     });
