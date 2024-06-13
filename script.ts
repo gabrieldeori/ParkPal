@@ -1,34 +1,37 @@
 const $ = (query: string): HTMLInputElement | null => document.querySelector(query);
 
 interface ParkingSpace {
-  id: string
-  plateNumber: string
-  name: string
-  enterTime: string
-  exitTime: string
+  id: string;
+  plateNumber: string;
+  name: string;
+  enterTime: string;
+  exitTime: string;
 }
 
 class ParkingSpaces {
-  private parkingSpaces: Array<ParkingSpace>
+  private parkingSpaces: Array<ParkingSpace>;
 
   constructor(loadedParkingSpaces: Array<ParkingSpace> | []) {
-    this.parkingSpaces = loadedParkingSpaces
+    this.parkingSpaces = loadedParkingSpaces;
   }
 
   create = (parkingSpace: ParkingSpace) => {
     if (this.parkingSpaces.length > 0) {
-      const doublePlateNumber = this.parkingSpaces.filter((el: ParkingSpace) => {
-        el.plateNumber === parkingSpace.plateNumber
-      })
-  
+      const doublePlateNumber = this.parkingSpaces.find((el: ParkingSpace) => {
+        return el.plateNumber === parkingSpace.plateNumber;
+      });
+
       if (doublePlateNumber) {
-        alert("Esse número de placa já consta em uma das vagas!")
-      } 
+        alert("Esse número de placa já consta em uma das vagas!");
+        return;
+      }
     }
+
+    this.parkingSpaces.push(parkingSpace);
   }
 
   read = () => {
-
+    return this.parkingSpaces
   }
 
   update = () => {
@@ -40,8 +43,12 @@ class ParkingSpaces {
   }
 }
 
+// Initiate
+const MemParkingSpaces = new ParkingSpaces([])
+
 // Events
 const registerButtonEvent = () => {
+
   const name = $("#name")?.value;
   const plateNumber = $("#plateNumber")?.value;
 
@@ -49,10 +56,20 @@ const registerButtonEvent = () => {
     alert("Os campos nome e placa são obrigatórios");
     return;
   }
+
+  MemParkingSpaces.create({
+    id: "0saf",
+    plateNumber,
+    name: name,
+    enterTime: "none",
+    exitTime: "nen",
+  })
+
+  console.log(MemParkingSpaces.read())
 }
 
 const addAllEventListeners = () => {
-  $("#register")?.addEventListener("click", registerEvent);
+  $("#register")?.addEventListener("click", registerButtonEvent);
 }
 
 
