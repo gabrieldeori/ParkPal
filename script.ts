@@ -15,23 +15,26 @@ class ParkingSpaces {
     this.parkingSpaces = loadedParkingSpaces;
   }
 
+  checkDoublePlate = (parkingSpace: ParkingSpace) => {
+    return this.parkingSpaces.find((el: ParkingSpace) => el.plateNumber === parkingSpace.plateNumber);
+  }
+
   create = (parkingSpace: ParkingSpace) => {
     if (this.parkingSpaces.length > 0) {
-      const doublePlateNumber = this.parkingSpaces.find((el: ParkingSpace) => {
-        return el.plateNumber === parkingSpace.plateNumber;
-      });
+      const doublePlateNumber = this.checkDoublePlate(parkingSpace)
 
       if (doublePlateNumber) {
-        alert("Esse número de placa já consta em uma das vagas!");
+        alert(`O número de placa (${doublePlateNumber}), já consta em uma das vagas!`);
         return;
       }
     }
 
     this.parkingSpaces.push(parkingSpace);
+    return parkingSpace;
   }
 
   read = () => {
-    return this.parkingSpaces
+    return this.parkingSpaces;
   }
 
   update = () => {
@@ -44,7 +47,7 @@ class ParkingSpaces {
 }
 
 // Initiate
-const MemParkingSpaces = new ParkingSpaces([])
+const MemParkingSpaces = new ParkingSpaces([]);
 
 // Events
 const registerButtonEvent = () => {
@@ -63,9 +66,9 @@ const registerButtonEvent = () => {
     name: name,
     enterTime: "none",
     exitTime: "nen",
-  })
+  });
 
-  console.log(MemParkingSpaces.read())
+  console.log(MemParkingSpaces.read());
 }
 
 const addAllEventListeners = () => {
