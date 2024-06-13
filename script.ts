@@ -1,11 +1,32 @@
 const $ = (query: string): HTMLInputElement | null => document.querySelector(query);
 
+const mock1 = [
+  {
+    id: '32x!#o',
+    plateNumber: 'GKR9534',
+    name: 'Bir',
+    entryTime: '2201895890152',
+  },
+  {
+    id: '@wggf!t',
+    plateNumber: 'GKR9534',
+    name: 'Zé',
+    entryTime: '2201895890152',
+  },
+  {
+    id: 'a%f(f',
+    plateNumber: 'GKR9534',
+    name: 'agagw',
+    entryTime: '2201895890152',
+  }
+]
+
 interface ParkingSpace {
   id: string;
   plateNumber: string;
   name: string;
-  enterTime: string;
-  exitTime: string;
+  entryTime: string;
+  exitTime?: string;
 }
 
 class ParkingSpaces {
@@ -33,7 +54,7 @@ class ParkingSpaces {
     return parkingSpace;
   }
 
-  read = () => {
+  read = (): Array<ParkingSpace> => {
     return this.parkingSpaces;
   }
 
@@ -47,39 +68,62 @@ class ParkingSpaces {
 }
 
 // Initiate
-const MemParkingSpaces = new ParkingSpaces([]);
+const MemParkingSpaces = new ParkingSpaces(mock1);
 
 // Events
 const registerButtonEvent = () => {
 
-  const name = $("#name")?.value;
-  const plateNumber = $("#plateNumber")?.value;
+  const name = $('#name')?.value;
+  const plateNumber = $('#plateNumber')?.value;
 
   if (!name || !plateNumber) {
-    alert("Os campos nome e placa são obrigatórios");
+    alert('Os campos nome e placa são obrigatórios');
     return;
   }
 
   MemParkingSpaces.create({
-    id: "0saf",
+    id: '0saf',
     plateNumber,
     name: name,
-    enterTime: "none",
-    exitTime: "nen",
+    entryTime: 'none',
   });
 
   console.log(MemParkingSpaces.read());
 }
 
 const addAllEventListeners = () => {
-  $("#register")?.addEventListener("click", registerButtonEvent);
+  $('#register')?.addEventListener('click', registerButtonEvent);
 }
 
+
+// Render
+function populateTable() {
+  const ParkSpacesTable = $('#parkingSpaces');
+  
+  if (ParkSpacesTable) {
+    ParkSpacesTable.innerHTML = '';
+
+    MemParkingSpaces.read().forEach((parkingSpace: ParkingSpace) => {
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${parkingSpace.name}</td>
+        <td>${parkingSpace.plateNumber}</td>
+        <td>${parkingSpace.entryTime}</td>
+        <td>
+          <button type='button'>X</button>
+        </td>
+      `
+
+      ParkSpacesTable.appendChild(newRow);
+    });
+  }
+}
 
 // App
 const App = (): void => {
   // Element Preparations
   addAllEventListeners();
+  populateTable();
 }
 
 // Execute
