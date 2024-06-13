@@ -51,6 +51,8 @@ class ParkingSpaces {
     }
 
     this.parkingSpaces.push(parkingSpace);
+
+    populateTable();
     return parkingSpace;
   }
 
@@ -94,7 +96,6 @@ const registerButtonEvent = () => {
 const addAllEventListeners = () => {
   $('#register')?.addEventListener('click', registerButtonEvent);
 }
-
 
 // Render
 function populateTable() {

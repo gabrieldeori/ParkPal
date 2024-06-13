@@ -34,6 +34,7 @@ class ParkingSpaces {
                 }
             }
             this.parkingSpaces.push(parkingSpace);
+            populateTable();
             return parkingSpace;
         };
         this.read = () => {
