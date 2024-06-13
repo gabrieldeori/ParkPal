@@ -3,21 +3,21 @@ const $ = (query) => document.querySelector(query);
 const mock1 = [
     {
         id: '32x!#o',
-        plateNumber: 'GKR9534',
+        plateNumber: 'GKR95ss34',
         name: 'Bir',
-        entryTime: '2201895890152',
+        entryTime: new Date(),
     },
     {
         id: '@wggf!t',
-        plateNumber: 'GKR9534',
+        plateNumber: 'GKR95gg34',
         name: 'Zé',
-        entryTime: '2201895890152',
+        entryTime: new Date(),
     },
     {
         id: 'a%f(f',
-        plateNumber: 'GKR9534',
+        plateNumber: 'GKR9wr534',
         name: 'agagw',
-        entryTime: '2201895890152',
+        entryTime: new Date(),
     }
 ];
 class ParkingSpaces {
@@ -62,7 +62,7 @@ const registerButtonEvent = () => {
         id: '0saf',
         plateNumber,
         name: name,
-        entryTime: 'none',
+        entryTime: new Date(),
     });
     console.log(MemParkingSpaces.read());
 };
