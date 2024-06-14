@@ -1,20 +1,18 @@
-const $ = (query: string): HTMLInputElement | null => document.querySelector(query);
-
 // Auxiliares
 //
 //
 //
-// Função para adicionar zero à esquerda se o número for menor que 10
-const padZero = (num: number) => (num < 10 ? `0${num}` : num);
+function leftPadZero (num: number) {
+  return (num < 10 ? `0${num}` : num);
+}
 
-// Função para formatar uma data para "dd/mm/yyyy - HH:MM:SS"
 const formatDate = (date: Date): string => {
-  const day = padZero(date.getDate());
-  const month = padZero(date.getMonth() + 1); // Meses começam de 0
+  const day = leftPadZero(date.getDate());
+  const month = leftPadZero(date.getMonth() + 1); // Meses começam de 0
   const year = date.getFullYear();
-  const hours = padZero(date.getHours());
-  const minutes = padZero(date.getMinutes());
-  const seconds = padZero(date.getSeconds());
+  const hours = leftPadZero(date.getHours());
+  const minutes = leftPadZero(date.getMinutes());
+  const seconds = leftPadZero(date.getSeconds());
 
   return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
 };
@@ -77,6 +75,7 @@ class ParkingSpaces {
 }
 
 // Initiate
+const $ = (query: string): HTMLInputElement | null => document.querySelector(query);
 const lstorageParkingSpaces = localStorage.getItem('ParkingSpaces') || '[]';
 const parsedParkingSpaces = JSON.parse(lstorageParkingSpaces)
 const MemParkingSpaces = new ParkingSpaces(parsedParkingSpaces);
