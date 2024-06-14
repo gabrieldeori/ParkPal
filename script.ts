@@ -32,11 +32,11 @@ class ParkingSpaces {
     this.parkingSpaces = loadedParkingSpaces;
   }
 
-  checkDoublePlate = (parkingSpace: ParkingSpace) => {
+  checkDoublePlate = (parkingSpace: ParkingSpace): ParkingSpace | undefined => {
     return this.parkingSpaces.find((el: ParkingSpace) => el.plateNumber === parkingSpace.plateNumber);
   }
 
-  create = (parkingSpace: ParkingSpace) => {
+  create = (parkingSpace: ParkingSpace): void => {
     if (this.parkingSpaces.length > 0) {
       const doublePlateNumber = this.checkDoublePlate(parkingSpace)
 
@@ -51,19 +51,18 @@ class ParkingSpaces {
     localStorage.setItem('ParkingSpaces', JSON.stringify(this.parkingSpaces));
 
     populateTable();
-    return parkingSpace;
   }
 
   read = (): Array<ParkingSpace> => {
     return this.parkingSpaces;
   }
 
-  update = () => {
+  update = (): void => {
 
   }
 
-  delete = (plateNumber: String) => {
-    const filteredParkingSpaces = this.parkingSpaces.filter((parkingSpace: ParkingSpace) => {
+  delete = (plateNumber: String): void => {
+    const filteredParkingSpaces = this.parkingSpaces.filter((parkingSpace: ParkingSpace): boolean => {
       return parkingSpace.plateNumber != plateNumber;
     });
 
@@ -112,7 +111,7 @@ function populateTable(): void {
   if (ParkSpacesTable) {
     ParkSpacesTable.innerHTML = '';
 
-    MemParkingSpaces.read().forEach((parkingSpace: ParkingSpace) => {
+    MemParkingSpaces.read().forEach((parkingSpace: ParkingSpace): void => {
       const newRow = document.createElement('tr');
 
       const entryDate = new Date(parkingSpace.entryTime);
@@ -128,7 +127,7 @@ function populateTable(): void {
         </td>
       `
 
-      newRow.querySelector(".delete-button")?.addEventListener('click', () => {
+      newRow.querySelector(".delete-button")?.addEventListener('click', (): void => {
         MemParkingSpaces.delete(parkingSpace.plateNumber);
       });
 
