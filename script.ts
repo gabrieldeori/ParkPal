@@ -6,7 +6,7 @@ function leftPadZero (num: number) {
   return (num < 10 ? `0${num}` : num);
 }
 
-const formatDate = (date: Date): string => {
+function formatDate (date: Date): string {
   const day = leftPadZero(date.getDate());
   const month = leftPadZero(date.getMonth() + 1); // Meses começam de 0
   const year = date.getFullYear();
@@ -81,7 +81,7 @@ const parsedParkingSpaces = JSON.parse(lstorageParkingSpaces)
 const MemParkingSpaces = new ParkingSpaces(parsedParkingSpaces);
 
 // Events
-const registerButtonEvent = () => {
+function registerButtonEvent(): void {
 
   const name = $('#name')?.value;
   const plateNumber = $('#plateNumber')?.value;
@@ -101,12 +101,12 @@ const registerButtonEvent = () => {
   console.log(MemParkingSpaces.read());
 }
 
-const addAllEventListeners = () => {
+function addAllEventListeners() {
   $('#register')?.addEventListener('click', registerButtonEvent);
 }
 
 // Render
-function populateTable() {
+function populateTable(): void {
   const ParkSpacesTable = $('#parkingSpaces');
 
   if (ParkSpacesTable) {
@@ -138,7 +138,7 @@ function populateTable() {
 }
 
 // App
-const App = (): void => {
+function App(): void {
   // Element Preparations
   addAllEventListeners();
   
