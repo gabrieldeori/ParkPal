@@ -72,6 +72,8 @@ class ParkingSpaces {
     });
 
     this.parkingSpaces = filteredParkingSpaces;
+    localStorage.setItem('ParkingSpaces', JSON.stringify(this.parkingSpaces));
+
     populateTable();
   }
 }

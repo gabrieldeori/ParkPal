@@ -48,6 +48,7 @@ class ParkingSpaces {
                 return parkingSpace.plateNumber != plateNumber;
             });
             this.parkingSpaces = filteredParkingSpaces;
+            localStorage.setItem('ParkingSpaces', JSON.stringify(this.parkingSpaces));
             populateTable();
         };
         this.parkingSpaces = loadedParkingSpaces;
@@ -70,7 +71,7 @@ const registerButtonEvent = () => {
         id: '0saf',
         plateNumber,
         name: name,
-        entryTime: new Date().getTime(),
+        entryTime: new Date(),
     });
     console.log(MemParkingSpaces.read());
 };
