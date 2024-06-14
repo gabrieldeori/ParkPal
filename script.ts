@@ -52,6 +52,8 @@ class ParkingSpaces {
 
     this.parkingSpaces.push(parkingSpace);
 
+    localStorage.setItem('ParkingSpaces', JSON.stringify(this.parkingSpaces));
+
     populateTable();
     return parkingSpace;
   }
