@@ -1,5 +1,18 @@
 "use strict";
 const $ = (query) => document.querySelector(query);
+// Auxiliares
+// Função para adicionar zero à esquerda se o número for menor que 10
+const padZero = (num) => (num < 10 ? `0${num}` : num);
+// Função para formatar uma data para "dd/mm/yyyy - HH:MM:SS"
+const formatDate = (date) => {
+    const day = padZero(date.getDate());
+    const month = padZero(date.getMonth() + 1); // Meses começam de 0
+    const year = date.getFullYear();
+    const hours = padZero(date.getHours());
+    const minutes = padZero(date.getMinutes());
+    const seconds = padZero(date.getSeconds());
+    return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+};
 const mock1 = [
     {
         id: '32x!#o',
@@ -71,7 +84,7 @@ const registerButtonEvent = () => {
         id: '0saf',
         plateNumber,
         name: name,
-        entryTime: new Date(),
+        entryTime: new Date().getTime(),
     });
     console.log(MemParkingSpaces.read());
 };
@@ -87,11 +100,13 @@ function populateTable() {
         MemParkingSpaces.read().forEach((parkingSpace) => {
             var _a;
             const newRow = document.createElement('tr');
+            const entryDate = new Date(parkingSpace.entryTime);
+            const formattedDate = formatDate(entryDate);
             newRow.id = parkingSpace.plateNumber;
             newRow.innerHTML = `
         <td>${parkingSpace.name}</td>
         <td>${parkingSpace.plateNumber}</td>
-        <td>${parkingSpace.entryTime}</td>
+        <td>${formattedDate}</td>
         <td>
           <button class="delete-button" type='button'>X</button>
         </td>
