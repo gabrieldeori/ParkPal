@@ -19,27 +19,6 @@ const formatDate = (date: Date): string => {
   return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
 };
 
-const mock1 = [
-  {
-    id: '32x!#o',
-    plateNumber: 'GKR95ss34',
-    name: 'Bir',
-    entryTime: new Date(),
-  },
-  {
-    id: '@wggf!t',
-    plateNumber: 'GKR95gg34',
-    name: 'Zé',
-    entryTime: new Date(),
-  },
-  {
-    id: 'a%f(f',
-    plateNumber: 'GKR9wr534',
-    name: 'agagw',
-    entryTime: new Date(),
-  }
-]
-
 interface ParkingSpace {
   id: string;
   plateNumber: string;
