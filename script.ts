@@ -25,8 +25,8 @@ interface ParkingSpace {
   id: string;
   plateNumber: string;
   name: string;
-  entryTime: Date;
-  exitTime?: Date;
+  entryTime: Number;
+  exitTime?: Number;
 }
 
 class ParkingSpaces {
@@ -98,7 +98,7 @@ const registerButtonEvent = () => {
     id: '0saf',
     plateNumber,
     name: name,
-    entryTime: new Date(),
+    entryTime: new Date().getTime(),
   });
 
   console.log(MemParkingSpaces.read());
