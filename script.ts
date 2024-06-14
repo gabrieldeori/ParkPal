@@ -2,8 +2,8 @@
 //
 //
 //
-function leftPadZero (num: number) {
-  return (num < 10 ? `0${num}` : num);
+function leftPadZero (num: number): string {
+  return (num < 10 ? `0${num}` : `num`);
 }
 
 function formatDate (date: Date): string {
@@ -101,7 +101,7 @@ function registerButtonEvent(): void {
   console.log(MemParkingSpaces.read());
 }
 
-function addAllEventListeners() {
+function addAllEventListeners(): void {
   $('#register')?.addEventListener('click', registerButtonEvent);
 }
 
