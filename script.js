@@ -53,7 +53,9 @@ class ParkingSpaces {
     }
 }
 // Initiate
-const MemParkingSpaces = new ParkingSpaces(mock1);
+const lstorageParkingSpaces = localStorage.getItem('ParkingSpaces') || '[]';
+const parsedParkingSpaces = JSON.parse(lstorageParkingSpaces);
+const MemParkingSpaces = new ParkingSpaces(parsedParkingSpaces);
 // Events
 const registerButtonEvent = () => {
     var _a, _b;
@@ -103,6 +105,7 @@ function populateTable() {
 const App = () => {
     // Element Preparations
     addAllEventListeners();
+    // Render
     populateTable();
 };
 // Execute
